@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>2048</title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
     <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -9,8 +10,8 @@
       <div class="header-div">
         <h1 class="game-name">2048</h1>
       </div>
-      <div class="board-div">
-        <div class="board-container">
+      <div class="game-div">
+        <div class="board-div">
           <div class="board-row">
             <div class="board-square">
             </div>
@@ -53,16 +54,16 @@
           </div>
         </div>
 
-        <div class="tile">
-          <div class="ps">
-          </div>
+        <div class="tile-div">
         </div>
       </div>
     </div>
 
     <script src="js/game-service.js"></script>
     <script src="js/board.js"></script>
+    <script src="js/tile.js"></script>
     <script src="js/input-service.js"></script>
+    <script src="js/renderer.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

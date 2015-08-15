@@ -3,9 +3,11 @@ function GameService (){
   this.size = 4;
   this.board = new Board(this.size);
   this.input = new InputService();
+  this.render= new Renderer();
   this.start_tiles = 2;
   this.is_over = false;
   this.is_won = false;
+  this.win_value = 2048;
   this.start();
   this.input.getKeyPressed(this.move.bind(this));
 
@@ -17,57 +19,74 @@ GameService.prototype = {
   start: function(){
     // We want 2 random tiles at the start
     for (var i = 0; i < this.start_tiles; i++) {
-      this.addRandomTile();
+      this.board.addRandomTile();
     }
-  },
 
-  addRandomTile: function(){
-    // We want 2 to appear more often
-    var rand_num = Math.floor(Math.random() * 10) + 1 <= 8 ? 2 : 4;
-    this.board.addToRandomPosition(rand_num);
+    this.render.render(this.board.squares);
   },
 
   move: function(direction){
-    console.log(direction);
+    //console.log(direction);
     var self = this;
-    var positions = this.traverseDirections(direction);
+    var is_moved = false;
+    var coordinates = self.board.getCoordinateIndex(direction);
 
-    positions.x.forEach(function(x) {
-      positions.y.forEach(function(y) {
+    // need to reset merge/tiles
+    self.board.resetTile();
+
+    //console.log(coordinates);
+    coordinates.x.forEach(function(x) {
+      coordinates.y.forEach(function(y) {
         var original_pos = {x:x,y:y};
-        var tile_content = self.board.getSquareValue(original_pos);
-        console.log(original_pos);
-        console.log(tile_content);
-        if (tile_content > 0){
-          var new_position = 
+        var tile = self.board.getSquareContent(original_pos);
+        if (tile !== null){
+          //console.log('Tile');
+          //console.log(tile);
+          var positions = self.board.getNextPosition(original_pos,direction);
+          var next_position = positions.next;
+          var next_tile = self.board.getSquareContent(next_position);
+          //console.log('Next Pos');
+          //console.log(positions);
+
+          if (next_tile && next_tile.value === tile.value && !next_tile.merged){
+            var new_value = tile.value * 2;
+            var merged_tile = self.board.createTile(tile,new_value);
+            merged_tile.merged = [tile, next_tile];
+            self.board.insertTile(merged_tile);
+            self.board.removeTile(tile);
+            self.board.moveTile(merged_tile,next_tile);
+
+            if (merged_tile.value >= self.win_value){
+              self.is_win = true;
+            }
+            is_moved = true;
+          }
+          else {
+            self.board.moveTile(tile,positions.new_pos);
+          }
+          
+          if (self.board.hasMoved(original_pos,positions.new_pos)){
+            is_moved = true;
+          }
+
         }
       });
     });
+    if(is_moved){
+      self.board.addRandomTile();
+
+      if (self.is_win || self.isOver){
+        self.is_over = true;
+      }
+    }
+    self.render.render(self.board.squares);
+    //console.log(self.board.squares);
   },
 
-  traverseDirections: function(direction){
-    var vectors = {
-      'left': { x: -1, y: 0 },
-      'right': { x: 1, y: 0 },
-      'up': { x: 0, y: -1 },
-      'down': { x: 0, y: 1 }
-    }; 
+  isOver: function(){
+    return this.board.hasFreeSquares();
+  },
 
-    var vector = vectors[direction];
-    var positions = {x: [], y: []};
-    for (var i = 0; i < this.size; i++) {
-      positions.x.push(i);
-      positions.y.push(i);
-    }
-
-    if (vector.y > 0) {
-      positions.y = positions.y.reverse();
-    }
-    if (vector.x > 0) {
-      positions.x = positions.x.reverse();
-    }
-    return positions;
-  }
 }
 
 
