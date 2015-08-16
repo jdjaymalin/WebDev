@@ -8,8 +8,10 @@ function GameService (){
   this.is_over = false;
   this.is_won = false;
   this.win_value = 2048;
-  this.start();
   this.input.getKeyPressed(this.move.bind(this));
+  this.input.isRestart(this.restart.bind(this));
+
+  this.start();
 
 }
 
@@ -22,7 +24,19 @@ GameService.prototype = {
       this.board.addRandomTile();
     }
 
-    this.render.render(this.board.squares);
+    var game_status = {
+      is_won : this.is_won,
+      is_over: this.is_over
+    };
+    this.render.render(this.board.squares,game_status);
+  },
+
+  restart: function(){
+    this.board.init();
+    this.is_over = false;
+    this.is_won = false;
+    this.render.hideMessage();
+    this.start();
   },
 
   move: function(direction){
@@ -57,7 +71,7 @@ GameService.prototype = {
             self.board.moveTile(merged_tile,next_tile);
 
             if (merged_tile.value >= self.win_value){
-              self.is_win = true;
+              self.is_won = true;
             }
             is_moved = true;
           }
@@ -75,16 +89,30 @@ GameService.prototype = {
     if(is_moved){
       self.board.addRandomTile();
 
-      if (self.is_win || self.isOver){
+      if (self.isOver()){
         self.is_over = true;
       }
     }
-    self.render.render(self.board.squares);
+    var game_stat = {
+      is_won: self.is_won,
+      is_over: self.is_over
+    }
+    self.render.render(self.board.squares,game_stat);
     //console.log(self.board.squares);
   },
 
   isOver: function(){
-    return this.board.hasFreeSquares();
+    if (!this.board.hasFreeSquares()) {
+      console.log('Free: No free squares');
+      if (!this.board.hasMergeTiles()) {
+        console.log('Merge: No merge tiles');
+        return true;    
+      }
+      else {
+        return false;
+      }
+    }
+    return false;
   },
 
 }

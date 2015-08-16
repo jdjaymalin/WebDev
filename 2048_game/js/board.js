@@ -40,7 +40,7 @@ Board.prototype = {
   },
 
   hasFreeSquares: function(){
-    if (this.getFreeSquares > 0){
+    if (this.getFreeSquares().length > 0){
       return true;
     }
     else{
@@ -169,7 +169,7 @@ Board.prototype = {
   resetTile: function(){
     for (var i = 0; i < this.size; i++){
       for (var j = 0; j < this.size; j++) {
-        var tile = this.squares[i][j];
+        var tile = this.getSquareContent({x:i,y:j});
         if (tile){
           tile.merged = null;
           tile.setPreviousPosition();
@@ -177,6 +177,33 @@ Board.prototype = {
         }
       }
     }
+  },
+
+  hasMergeTiles: function() {
+    var self = this;
+    var has_merge = false;
+    for (var i = 0; i < this.size; i++){
+      for (var j = 0; j < this.size; j++) {
+        var tile = this.getSquareContent({x:i,y:j});
+        var direction = ['left', 'right', 'up', 'down'];
+        if (tile){
+          direction.forEach( function(direction) {
+            var vector = self.vectorMap[direction];
+            var pos = {
+              x: i + vector.x,
+              y: j + vector.y
+            }
+            var neighbor = self.getSquareContent(pos);
+            if (neighbor && neighbor.value === tile.value) {
+              console.log('TRUE');
+              has_merge = true;
+              return true;
+            }
+          });
+        }
+      }
+    }
+    return has_merge;
   },
 
 }

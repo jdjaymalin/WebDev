@@ -16,11 +16,15 @@ h1.game-name {
   font-weight: bold;
   margin: 0;
   display: block;
-  float: left;
+  text-align: center;
 }
 
 div {
   display: block;
+}
+
+.header-div {
+  margin: 0 auto;
 }
 
 .header-div:after {
@@ -222,59 +226,6 @@ div {
   box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
 }
 
-@-webkit-keyframes pop {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    transform: scale(0); }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    transform: scale(1.2); }
-
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    transform: scale(1); } }
-@-moz-keyframes pop {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    transform: scale(0); }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    transform: scale(1.2); }
-
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    transform: scale(1); } }
-@keyframes pop {
-  0% {
-    -webkit-transform: scale(0);
-    -moz-transform: scale(0);
-    transform: scale(0); }
-
-  50% {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    transform: scale(1.2); }
-
-  100% {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    transform: scale(1); } }
-.tile-merged {
-  z-index: 20;
-  -webkit-animation: pop 200ms ease 100ms;
-  -moz-animation: pop 200ms ease 100ms;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-}
-
 @-webkit-keyframes appear {
   0% {
     opacity: 0;
@@ -310,10 +261,47 @@ div {
     opacity: 1;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1); } 
+}
 .tile-new {
   -webkit-animation: appear 100ms ease 100ms;
   -moz-animation: appear 100ms ease 100ms;
   -webkit-animation-fill-mode: both;
   -moz-animation-fill-mode: both;
+}
+
+.game-message {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(241, 224, 207, 0.84);
+  z-index: 100;
+  text-align: center;
+  -webkit-animation: fade-in 800ms ease 1200ms;
+  -moz-animation: fade-in 800ms ease 1200ms;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+}
+.game-message p {
+    font-size: 60px;
+    font-weight: bold;
+    height: 60px;
+    line-height: 60px;
+    margin-top: 120px;
+}
+.retry-button {
+    display: inline-block;
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #f9f6f2;
+    height: 40px;
+    line-height: 42px;
+    cursor: pointer;
+    display: block;
+    text-align: center;
 }

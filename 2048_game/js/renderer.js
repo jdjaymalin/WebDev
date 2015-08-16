@@ -1,10 +1,11 @@
 function Renderer(){
   this.tileContainer = document.querySelector(".tile-div");
+  this.messageContainer = document.querySelector(".game-message");
 }
 
 Renderer.prototype = {
   
-  render: function(board){
+  render: function(board,stat){
     var self = this;
     window.requestAnimationFrame(function() {
       self.clearDiv(self.tileContainer);     
@@ -16,8 +17,11 @@ Renderer.prototype = {
           }
         }
       }
-
     });
+
+    if (stat.is_won || stat.is_over) {
+      self.showMessage(stat.is_won);
+    }
   },
 
   insertTile: function(tile){
@@ -65,7 +69,6 @@ Renderer.prototype = {
         classes[1] = 'tile-' + tile.value;
         element.setAttribute("class", classes.join(" "));
       });
-      console.log(classes);
     }
     else {
         classes.push("tile-new");
@@ -81,4 +84,15 @@ Renderer.prototype = {
       div.removeChild(div.firstChild);
     }
   },
+
+  showMessage: function(is_won){
+    var message = is_won ? "Winner" : "Game Over";
+    this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+    this.messageContainer.style.display = "block";
+  },
+
+  hideMessage: function(){
+    this.messageContainer.getElementsByTagName("p")[0].textContent = "";
+    this.messageContainer.style.display = "none";
+  }
 }

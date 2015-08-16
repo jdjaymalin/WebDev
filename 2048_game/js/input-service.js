@@ -22,6 +22,11 @@ InputService.prototype = {
       direction = keyMap[key];
       callback(direction);
     });
+  },
 
+  isRestart: function(callback){
+    var button = document.querySelector(".retry-button");
+    button.addEventListener("click", callback.bind(this));
   }
+
 }
