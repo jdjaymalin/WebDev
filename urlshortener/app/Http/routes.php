@@ -10,8 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Url;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('urlshortener');
 });
-
+Route::get('/invalid', function () {
+    return view('invalidurl');
+});
+Route::post('/', 'UrlController@shorten');
+Route::get('{code}','UrlController@redirect');
