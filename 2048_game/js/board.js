@@ -26,6 +26,8 @@ Board.prototype = {
     }
   },
 
+  // Returns an aray of coordinates of each free or
+  // non occupied squares
   getFreeSquares: function() {
     var free_squares = [];
     for (var i = 0; i < this.size; i++){
@@ -39,8 +41,9 @@ Board.prototype = {
     return free_squares;
   },
 
+  // Checks if the board still has free squares
   hasFreeSquares: function(){
-    if (this.getFreeSquares > 0){
+    if (this.getFreeSquares().length > 0){
       return true;
     }
     else{
@@ -48,6 +51,8 @@ Board.prototype = {
     }
   },
 
+  // Add random tiles in random place from the array of
+  // free squares
   addRandomTile: function(){
     var rand_num = Math.floor(Math.random() * 100) + 1 <= 95 ? 2 : 4;
     var free_squares = this.getFreeSquares();
@@ -60,9 +65,9 @@ Board.prototype = {
     };
 
     this.squares[pos.x][pos.y] = new Tile(pos,rand_num);;
-    //console.log(this.squares[pos.x][pos.y]);
   },
 
+  // Returns the content of swuare given the position
   getSquareContent: function(position){
     if (this.isInBoard(position)){
       return this.squares[position.x][position.y];
@@ -72,11 +77,15 @@ Board.prototype = {
     }
   },
 
+  // We need to make sure if a position that is given
+  // is within the board's bounds
   isInBoard: function(position){
     return position.x >= 0 && position.x < this.size &&
       position.y >= 0 && position.y < this.size;
   },
   
+  // Returns an ordered array of how we wnat to traverse
+  // the board
   getCoordinateIndex: function(direction){
     var positions = {
       x: [], 
@@ -107,6 +116,7 @@ Board.prototype = {
     return true;
   },
 
+  // Calculates the the next position of a tile after a move
   getNextPosition: function(pos,direction){
     var vector = this.vectorMap[direction];
     var current;
@@ -169,14 +179,42 @@ Board.prototype = {
   resetTile: function(){
     for (var i = 0; i < this.size; i++){
       for (var j = 0; j < this.size; j++) {
-        var tile = this.squares[i][j];
+        var tile = this.getSquareContent({x:i,y:j});
         if (tile){
           tile.merged = null;
           tile.setPreviousPosition();
-          //console.log(tile);
         }
       }
     }
+  },
+
+  // We want to know if the board has tiles that can still 
+  // be merged
+  hasMergeTiles: function() {
+    var self = this;
+    var has_merge = false;
+    for (var i = 0; i < this.size; i++){
+      for (var j = 0; j < this.size; j++) {
+        var tile = this.getSquareContent({x:i,y:j});
+        var direction = ['left', 'right', 'up', 'down'];
+        if (tile){
+          direction.forEach( function(direction) {
+            var vector = self.vectorMap[direction];
+            var pos = {
+              x: i + vector.x,
+              y: j + vector.y
+            }
+            var neighbor = self.getSquareContent(pos);
+            if (neighbor && neighbor.value === tile.value) {
+              console.log('TRUE');
+              has_merge = true;
+              return true;
+            }
+          });
+        }
+      }
+    }
+    return has_merge;
   },
 
 }
