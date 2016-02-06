@@ -14,6 +14,7 @@ class UrlController extends Controller {
     /**
     * Function to shorten the url given
     * return $url to '/'
+    * 
     */
     public function shorten() {
         // Validate if the entered url is a valid URL
@@ -49,6 +50,12 @@ class UrlController extends Controller {
         }
     }
 
+    /**
+     * This functions add the URL to the datase and generates the
+     * unique short url
+     * 
+     * return string $new code
+     */
     private function _addUrl() {
 
         $new_code;
@@ -71,6 +78,11 @@ class UrlController extends Controller {
         return $new_code;
     }
 
+    /**
+     * Redirect the shor url the the long/original url
+     * redirect the long url to the view 
+     * 
+     */
     public function redirect($code){
         $row = Url::where('code', '=', $code)->first();
 
