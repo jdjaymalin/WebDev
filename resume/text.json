@@ -1,0 +1,96 @@
+{
+  "name" : "Jean Dominique Jaymalin",
+  "occupation" : "Software and Web Developer",
+  "address" : {
+    "city" : "Chicago",
+    "state" : "IL",
+    "zip" : "60612",
+    "country" : "USA"
+  },
+  "contact" : {
+    "mobile" : "+1(224)6223075",
+    "email" : "jaymalin.jd@gmail.com"
+  },
+  "links" : {
+    "github" : "https://github.com/jdjaymalin",
+    "linkedin" : "http://www.linkedin.com/in/jdjaymalin"
+  },
+  "profile" : "A Software and Web Developer who has a keen eye for detail and very focused on getting the job done effectively and efficiently. With almost 2 years of experience, I have learned a great deal of technical, personal, and communication skills and have become very good with self-management. Having been exposed to cross-cultural work environments, I find it enjoyable as it offers a dynamic learning, which made me become a fast-learner and adaptable developer. As a very motivated individual who is happy to travel, I am not afraid to take on new challenges and get immersed in a new culture or environment.\nI have had professional experience in setting-up and maintaining client-facing systems, writing scripts and developing tools for more efficient workflow, troubleshooting sensitive and real-time applications, and website development.",
+  "experience" : [
+    {
+      "company" : {
+        "name" : "myFootPath",
+        "city" : "Chicago",
+        "state" : "IL",
+        "country" : "USA"
+      },
+      "position" : "Software and Web Developer",
+      "start" : "2014",
+      "end" : "present",
+      "jobSummary" : "Chosen among a pool of talented international candidates for the traineeship position. Have been involved in different projects and was able to independently get up to speed in less than 3 months. Received warm approvals from Directors and co-workers for various projects/tasks that I have worked on.",
+      "tasks" : [
+        "Improved in-house tools that greatly helped business operations",
+        "Developed and maintained client-facing websites for various company projects",
+        "Initiated writing scripts that helped speed up day-to-day work such as automating tedious processes",
+        "Proactively fixed any issues that comes up",
+        "In charge of the legacy codebase while a new one is being developed and is the go-to person for any and all changes, improvement, or bug fixes",
+        "Worked with different teams for time-sensitive projects and provided excellent output",
+        "Immersed in a new environment and culture and learned to adapt in a cross-cultural workplace"
+      ]
+    },
+    {
+      "company" : {
+        "name" : "FactSet Philippines, Inc.",
+        "city" : "Taguig City",
+        "state" : "Metro Manila",
+        "country" : "Philippines"
+      },
+      "position" : "Software Engineer",
+      "start" : " May 2013",
+      "end" : "June 2014",
+      "jobSummary" : "Offered a permanent position after a 2-month intensive internship in the same department. Gained high performance ratings from Team Leads and Managers for being proactive and having great self-management and prioritization skills. Awarded as the team’s Employee of the Quarter. Initiated creation of tools that helped the team’s efficiency."
+      "tasks" : [
+        "Ownership of the responsibility of client-facing and real-time systems",
+        "In charge of maintaining system-level framework and led the training of co-workers regarding the framework",
+        "Developed tools that runs on multiple platforms that improved system processes",
+        "Troubleshoot system breakages and apply fix on time-sensitive and client-facing applications",
+        "Effectively documented systems, processes, and breakages which greatly helped business operations",
+        "Proactively led various company events and trainings",
+        "Worked with teams from different company offices such as Norwalk, New York, and London"
+      ]
+    },
+    {
+      "company" : {
+        "name" : "FactSet Philippines, Inc.",
+        "city" : "Taguig City",
+        "state" : "Metro Manila",
+        "country" : "Philippines"
+      },
+      "position" : "Intern",
+      "start" : " April 2012",
+      "end" : "July 2012",
+      "jobSummary" : "Was chosen to be one of two very first summer interns among hundreds of applicants from different universities in the Philippines", 
+      "tasks" : [
+        "Developed a web application to track employees’ goals that greatly helped managers review productivity in less than 6 weeks",
+        "Worked in 50% back-end and 50% front-end of the project"
+      ]
+    },
+    {
+      "company" : {
+        "name" : "University of the Philippines Health Services",
+        "city" : "Quezon City",
+        "state" : "Metro Manila",
+        "country" : "Philippines"
+      },
+      "position" : "Undergraduate Thesis",
+      "start" : "2012",
+      "end" : "2013",
+      "jobSummary" : ""
+      "tasks" : [
+        "Developed a more secure and efficient web-based system for Radiology Department using OpenMRS framework",
+        "Worked hand-in-hand with the Department head to come up with the most desired process and interface",
+        "In charge with developing 60% of system back-end design and 40% front-end design"
+      ]
+    }
+  ]
+}
