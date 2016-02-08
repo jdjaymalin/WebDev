@@ -43,22 +43,110 @@ var data = {
       "company" : {
         "name" : "FactSet Philippines, Inc.",
         "city" : "Taguig City",
-        "state" : "",
+        "state" : "Metro Manila",
         "country" : "Philippines"
       },
       "position" : "Software Engineer",
-      "start" : "May 2013",
+      "start" : " May 2013",
       "end" : "June 2014",
-      "jobSummary" : "Chosen among a pool of talented international candidates for the traineeship position. Have been involved in different projects and was able to independently get up to speed in less than 3 months. Received warm approvals from Directors and co-workers for various projects/tasks that I have worked on.",
+      "jobSummary" : "Offered a permanent position after a 2-month intensive internship in the same department. Gained high performance ratings from Team Leads and Managers for being proactive and having great self-management and prioritization skills. Awarded as the team’s Employee of the Quarter. Initiated creation of tools that helped the team efficiency.",
       "tasks" : [
-        "Improved in-house tools that greatly helped business operations",
-        "Developed and maintained client-facing websites for various company projects",
-        "Initiated writing scripts that helped speed up day-to-day work such as automating tedious processes",
-        "Proactively fixed any issues that comes up",
-        "In charge of the legacy codebase while a new one is being developed and is the go-to person for any and all changes, improvement, or bug fixes",
-        "Worked with different teams for time-sensitive projects and provided excellent output",
-        "Immersed in a new environment and culture and learned to adapt in a cross-cultural workplace"
+        "Ownership of the responsibility of client-facing and real-time systems",
+        "In charge of maintaining system-level framework and led the training of co-workers regarding the framework",
+        "Developed tools that runs on multiple platforms that improved system processes",
+        "Troubleshoot system breakages and apply fix on time-sensitive and client-facing applications",
+        "Effectively documented systems, processes, and breakages which greatly helped business operations",
+        "Proactively led various company events and trainings",
+        "Worked with teams from different company offices such as Norwalk, New York, and London"
+      ]
+    },
+    {
+      "company" : {
+        "name" : "FactSet Philippines, Inc.",
+        "city" : "Taguig City",
+        "state" : "Metro Manila",
+        "country" : "Philippines"
+      },
+      "position" : "Intern",
+      "start" : " April 2012",
+      "end" : "July 2012",
+      "jobSummary" : "Was chosen to be one of two very first summer interns among hundreds of applicants from different universities in the Philippines", 
+      "tasks" : [
+        "Developed a web application to track employees’ goals that greatly helped managers review productivity in less than 6 weeks",
+        "Worked in 50% back-end and 50% front-end of the project"
+      ]
+    },
+    {
+      "company" : {
+        "name" : "University of the Philippines Health Services",
+        "city" : "Quezon City",
+        "state" : "Metro Manila",
+        "country" : "Philippines"
+      },
+      "position" : "Undergraduate Thesis",
+      "start" : "2012",
+      "end" : "2013",
+      "jobSummary" : "",
+      "tasks" : [
+        "Developed a more secure and efficient web-based system for Radiology Department using OpenMRS framework",
+        "Worked hand-in-hand with the Department head to come up with the most desired process and interface",
+        "In charge with developing 60% of system back-end design and 40% front-end design"
       ]
     }
-  ]
+  ],
+  "skills": {
+      "languages" : [
+          "Java", "C", "PHP", "Perl", "Javascript", "C++", "Bash", "HTML/5", "CSS/3"
+      ],
+      "framework" : [
+          "jQuery", "AJAX", "Perl Dancer", "Spring MVC", "JSON", "PHP CodeIgniter", "PHP Laravel", "OOP", "MVC", "Agile practices such as Scrum and Kanban", "Git", "Perforce"
+      ],
+      "database" : [
+          "MySQL"
+      ],
+      "ide" : [
+          "Eclipse", "NetBeans IDE", "Vim", "IntelliJ", "Sublime"
+      ],
+      "operatingSystem" : [
+          "Windows", "Unix", "Linux", "Mac OS"
+      ]
+  },
+  "education" : {
+      "degree" : "Bachelor of Science in Computer Science",
+      "university" : "University of the Philippines Diliman",
+      "start" : "2009",
+      "end" : "2013",
+      "summary" : "During my time in the academe, I have learned so much about Computer Programming, Data Structures and Algorithms, Database Systems, Software Engineering, Mathematical Theories, and Numerical Methods. I have been very active in cocurricular activities and held leadership positions. I have experience working on projects alone and with a team without any issues."
+  },
+  "achievements" : {
+      "websites" : [
+          {
+              "name" : "Operation Graduate",
+              "link" : "www.operationgraduate.com",
+              "year" : "2015"
+          },
+          {
+              "name" : "US Grad Path",
+              "link" : "www.usgradpath.com",
+              "year" : "2015"
+          }
+      ],
+      "projects" : [
+          {
+              "name" : "Combix",
+              "description" : "Ideaspace Technopreneurship Bootcamp – 2nd Place and University of the Philippines Enterprise Awardee",
+              "year" : "2013"
+          },
+          {
+              "name" : "Cost Comparison",
+              "description" : "Application used by Anesthesiologists at Abbott Philippines",
+              "year" : "2012"
+          },
+          {
+              "name" : "Pain Level Mobile App",
+              "description" : "A mobile application to update pain levels of patients for the Anesthesiology Department of St. Luke’s Medical Hospital",
+              "year" : "2012"
+          }
+      ]
+  }
 }

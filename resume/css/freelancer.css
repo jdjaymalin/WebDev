@@ -16,6 +16,12 @@ p.small {
     font-size: 16px;
 }
 
+.img-circular {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
 a,
 a:hover,
 a:focus,

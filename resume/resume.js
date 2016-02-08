@@ -26,10 +26,14 @@ Resume.prototype = {
         this.occupation  = data.occupation;
         this.profile     = data.profile;
         this.experiences  = data.experience;
+        this.education = data.education;
+        this.skills  = data.skills;
         this.renderName();
         this.renderOccupation();
         this.renderProfile();
         this.renderExperience();
+        this.renderEducation();
+        this.renderSkills();
     },
 
     renderName: function() {
@@ -71,11 +75,67 @@ Resume.prototype = {
                 '</div>'
             );
 
-              /*
-            experience.tasks.forEach(function(task) {
-            )};
-                */
         });
+    },
+
+    renderSkills: function() {
+        var languages = '',
+            framework = '',
+            environment = '',
+            database = '',
+            opSystem = '';
+
+        this.skills.languages.forEach(function(lang) {
+            languages += '<li>' + lang + '</li>'; 
+        });
+        this.skills.framework.forEach(function(fw) {
+            framework += '<li>' + fw + '</li>'; 
+        });
+        this.skills.database.forEach(function(db) {
+            database += '<li>' + db + '</li>'; 
+        });
+        this.skills.ide.forEach(function(ide) {
+            environment += '<li>' + ide + '</li>'; 
+        });
+        $('#skillset').append(
+            '<div class="row">' +  
+                '<div class="col-lg-3">' +  
+                    '<h4>Programming Languages</h4>' + 
+                    '<div style="padding-left: 5%">' +
+                        languages + 
+                    '</div>' + 
+                '</div>' + 
+                '<div class="col-lg-3">' + 
+                    '<h4>Technologies and Frameworks</h4>' + 
+                    '<div style="padding-left: 5%">' +
+                        framework + 
+                    '</div>' + 
+                '</div>' + 
+                '<div class="col-lg-3">' + 
+                    '<h4>Database Systems</h4>' + 
+                    '<div style="padding-left: 5%">' +
+                        database + 
+                    '</div>' + 
+                '</div>' + 
+                '<div class="col-lg-3">' +  
+                    '<h4>Development Environment</h4>' + 
+                    '<div style="padding-left: 5%">' +
+                        environment + 
+                    '</div>' + 
+                '</div>' + 
+            '</div>'
+        );
+    },
+
+    renderEducation : function() {
+        $('#education-list').append(
+            '<div class="col-lg-12">' + 
+                '<h3>' + this.education.degree + '</h3>' + 
+                '<h4>' + this.education.university + '</h4>' + 
+                '<h5>' + this.education.start + ' - ' + this.education.end + '</h4>' + 
+                '<p style="padding-left: 5%">'  + this.education.summary + '</p>' + 
+            '</div>'
+        );
     }
 }
 
