@@ -9,7 +9,7 @@ var data = {
     "country" : "USA"
   },
   "contact" : {
-    "mobile" : "+1(224)6223075",
+    "mobile" : "+1 (224) 6223075",
     "email" : "jaymalin.jd@gmail.com"
   },
   "links" : {
@@ -118,7 +118,7 @@ var data = {
       "end" : "2013",
       "summary" : "During my time in the academe, I have learned so much about Computer Programming, Data Structures and Algorithms, Database Systems, Software Engineering, Mathematical Theories, and Numerical Methods. I have been very active in cocurricular activities and held leadership positions. I have experience working on projects alone and with a team without any issues."
   },
-  "achievements" : {
+  "projects" : {
       "websites" : [
           {
               "name" : "Operation Graduate",

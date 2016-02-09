@@ -25,15 +25,23 @@ Resume.prototype = {
         this.lastname    = data.lastname;
         this.occupation  = data.occupation;
         this.profile     = data.profile;
-        this.experiences  = data.experience;
-        this.education = data.education;
-        this.skills  = data.skills;
+        this.experiences = data.experience;
+        this.education   = data.education;
+        this.skills      = data.skills;
+        this.projects    = data.projects;
+        this.address     = data.address;
+        this.contact     = data.contact;
+        this.links       = data.links;
         this.renderName();
         this.renderOccupation();
         this.renderProfile();
         this.renderExperience();
         this.renderEducation();
         this.renderSkills();
+        this.renderProjects();
+        this.renderAddress();
+        this.renderContact();
+        this.renderSocial();
     },
 
     renderName: function() {
@@ -136,7 +144,53 @@ Resume.prototype = {
                 '<p style="padding-left: 5%">'  + this.education.summary + '</p>' + 
             '</div>'
         );
+    },
+
+    renderProjects : function() {
+        var website = '',
+            project = '';
+        this.projects.websites.forEach(function(site) {
+            website += '<li><h4><a href="' + site.link + '">' + site.name + '</a></h4></li>'; 
+        });
+        this.projects.projects.forEach(function(proj) {
+            project += '<li><h4>' + proj.name + '</h4></li>'
+                    +  '<ul><li>' + proj.description + '</li></ul>'; 
+        });
+        $('#project-list').append(
+            '<div class="col-lg-6">' + 
+                '<h3>Projects</h3>' + project +  
+            '</div>' + 
+            '<div class="col-lg-6">' + 
+                '<h3>Websites</h3>' + website +  
+            '</div>' 
+        );
+                    
+    },
+
+    renderAddress : function() {
+        $('#location').append(this.address.city + ', ' + this.address.state + '<br>' + 
+            this.address.country + ' ' + this.address.zip 
+        );
+    },
+
+    renderSocial : function() {
+        $('#social').append(
+            '<li>' +
+                '<a href="' + this.links.github + '" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>' + 
+            '</li>' + 
+            '<li>' +
+                '<a href="' + this.links.linkedin + '" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>' + 
+            '</li>' 
+        );
+    },
+
+    renderContact : function() {
+        $('#contact').append(
+            '<p>' + this.contact.email + '</p>' +
+            '<p>' + this.contact.mobile + '</p>' 
+        );
     }
+
 }
 
 var check = new Resume();
