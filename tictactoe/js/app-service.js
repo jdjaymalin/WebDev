@@ -1,21 +1,30 @@
 function AppService() {
-    this.size = 5;
+    this.size = null;
     this.infinity = 99;
-    this.maxDepth = 4;
+    this.maxDepth = 7;
     this.winArr = [];
-    this.boardObj = new Board(this.size);
-	this.board = this.boardObj.board;
-    //this.boardObj.drawBoard();
-    this.getWinningCombinations();
-    this.getInput();
-
-
+    //this.boardObj = null;
+    this.boardObj = new Board();
+    this.board = [];
 }
 
 AppService.prototype = {
+    start: function(size) {
+        this.size = size;
+        //console.log(this.boardObj);
+        this.boardObj.init(this.size);
+	    this.board = this.boardObj.board;
+        this.getWinningCombinations();
+        this.getInput();
+    },
+    restart: function(size) {
+        this.start(size);
+        //this.start();
+    },
     getInput: function(){
         var self = this;
-        document.addEventListener("click", function (e) {
+        var grid = document.querySelector("#board");
+        grid.addEventListener("click", function (e) {
             //console.log(e.target.id);
             var index = e.target.id.split('-').pop();
             if (e.target.id && !self.board[index]){ 
@@ -31,8 +40,8 @@ AppService.prototype = {
                 if (self.boardObj.isBoardFull()){
                     return alert('it\'s a tie')
                 }
-                console.log(next);
-                console.log(self.board);
+                //console.log(next);
+                //console.log(self.board);
                 if (self.checkWinner(0) > 0) {
                     return alert('you lose');
                 }
@@ -134,5 +143,13 @@ AppService.prototype = {
 
 }
 
-var check = new AppService();
-check.getWinningCombinations();
+var check = new AppService(4);
+var gb = document.querySelector("#three");
+gb.addEventListener("click", function (e) {
+    check.restart(3);
+});
+var gb = document.querySelector("#four");
+gb.addEventListener("click", function (e) {
+    check.restart(4);
+});
+//check.getWinningCombinations();

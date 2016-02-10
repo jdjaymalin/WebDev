@@ -1,15 +1,16 @@
-function Board(size) {
-    this.size = size;
+function Board() {
+    this.size = 0;
     this.FREE = ' ';
     this.X = -1; //user
     this.O = 1; //comp
 	this.board = [];
 	//this.board = [1,1,1,0,0,0,0,0,0];
-	this.init();
+	//this.init();
 }
 
 Board.prototype = {
-    init: function() {
+    init: function(size) {
+        this.size = size;
 		for ( var i=0; i<this.size*this.size; i++ ){
 			this.board[i] = 0;
 		}
@@ -19,6 +20,7 @@ Board.prototype = {
 
     drawBoard: function() {
         var board = document.getElementById('board');
+        board.innerHTML = "";
         var i,j;
         for (i=0; i<this.size; i++){
             var row = board.insertRow(i);
