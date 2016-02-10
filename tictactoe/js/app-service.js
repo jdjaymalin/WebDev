@@ -3,7 +3,6 @@ function AppService() {
     this.infinity = 99;
     this.maxDepth = 7;
     this.winArr = [];
-    //this.boardObj = null;
     this.boardObj = new Board();
     this.board = [];
 }
@@ -11,7 +10,6 @@ function AppService() {
 AppService.prototype = {
     start: function(size) {
         this.size = size;
-        //console.log(this.boardObj);
         this.boardObj.init(this.size);
 	    this.board = this.boardObj.board;
         this.getWinningCombinations();
@@ -19,13 +17,11 @@ AppService.prototype = {
     },
     restart: function(size) {
         this.start(size);
-        //this.start();
     },
     getInput: function(){
         var self = this;
         var grid = document.querySelector("#board");
         grid.addEventListener("click", function (e) {
-            //console.log(e.target.id);
             var index = e.target.id.split('-').pop();
             if (e.target.id && !self.board[index]){ 
                 if (self.checkWinner(0) < 0) {
@@ -40,12 +36,9 @@ AppService.prototype = {
                 if (self.boardObj.isBoardFull()){
                     return alert('it\'s a tie')
                 }
-                //console.log(next);
-                //console.log(self.board);
                 if (self.checkWinner(0) > 0) {
                     return alert('you lose');
                 }
-                //console.log(self.board);
             }
         });
     },
@@ -67,11 +60,6 @@ AppService.prototype = {
             dia2.push(i*(this.size-1) + (this.size-1));
         }
         this.winArr.push(dia1,dia2);
-        //console.log(this.winArr);
-		//console.log(this.boardObj.board);
-        
-        //console.log(this.board);
-        //console.log(this.isGameOver());
     },
 
     checkWinner: function(depth){
@@ -92,46 +80,38 @@ AppService.prototype = {
                 return depth-this.infinity;
             }
         }
-			//console.log(this.winArr[i]);
     },
 
     getComputerMove: function(depth, player, alpha, beta) {
-        var i   = this.size*this.size,
+        var i   = (this.size*this.size) - 1, 
             min = -this.infinity,
             max,
             next,
             value = this.checkWinner(depth);
-            //console.log(this.checkWinner(depth));
         if (value){
             return value * player;
         }
-        /*
-        if (this.boardObj.isBoardFull()){
-            return undefined;
-        }
-        */
         if (this.maxDepth > depth){
-        for (i-=1; i>0; i--){
-          //console.log(i);
-            if (!this.board[i]) {
-                this.board[i] = player;
-                value = - this.getComputerMove(depth+1, -player, -beta, -alpha);
-                this.board[i] = 0;
-                if (max === undefined || value > max) {
-                    max = value;
-                }
-                if (value > alpha) {
-                    alpha = value;
-                }
-                if (alpha >= beta) {
-                    return alpha;
-                }
-                if (max > min) {
-                    min = max;
-                    next = i;
+            for (i; i>0; i--){
+                if (!this.board[i]) {
+                    this.board[i] = player;
+                    value = - this.getComputerMove(depth+1, -player, -beta, -alpha);
+                    this.board[i] = 0;
+                    if (max === undefined || value > max) {
+                        max = value;
+                    }
+                    if (value > alpha) {
+                        alpha = value;
+                    }
+                    if (alpha >= beta) {
+                        return alpha;
+                    }
+                    if (max > min) {
+                        min = max;
+                        next = i;
+                    }
                 }
             }
-        }
         }
         if (depth) {
             return max || 0;
@@ -140,16 +120,4 @@ AppService.prototype = {
             return next;
         }
     }
-
 }
-
-var check = new AppService(4);
-var gb = document.querySelector("#three");
-gb.addEventListener("click", function (e) {
-    check.restart(3);
-});
-var gb = document.querySelector("#four");
-gb.addEventListener("click", function (e) {
-    check.restart(4);
-});
-//check.getWinningCombinations();
