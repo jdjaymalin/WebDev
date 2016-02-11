@@ -11,6 +11,7 @@ function Board() {
 Board.prototype = {
     init: function(size) {
         this.size = size;
+        this.board = [];
 		for ( var i=0; i<this.size*this.size; i++ ){
 			this.board[i] = 0;
 		}

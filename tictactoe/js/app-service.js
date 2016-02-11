@@ -48,6 +48,7 @@ AppService.prototype = {
             dia2   = [];
         var i,j;
 
+        this.winArr = [];
         for ( i = 0; i<this.size; i++ ){
             var hor = [],
                 ver = [];
