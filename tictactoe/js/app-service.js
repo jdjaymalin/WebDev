@@ -73,17 +73,17 @@ AppService.prototype = {
                     o--;
                 }
             }
-            if (!x) {
-                return this.infinity-depth;
+            if (x == 0) {
+                return (this.size*this.size)-depth;
             }
-            if (!o) {
-                return depth-this.infinity;
+            if (o == 0) {
+                return depth-(this.size*this.size);
             }
         }
     },
 
     getComputerMove: function(depth, player, alpha, beta) {
-        var i   = (this.size*this.size) - 1, 
+        var cells   = (this.size*this.size), 
             min = -this.infinity,
             max,
             next,
@@ -91,9 +91,10 @@ AppService.prototype = {
         if (value){
             return value * player;
         }
+		
         if (this.maxDepth > depth){
-            for (i; i>=0; i--){
-                if (!this.board[i]) {
+            for (var i=0; i<cells; i++){
+                if (this.board[i] == 0) {
                     this.board[i] = player;
                     value = - this.getComputerMove(depth+1, -player, -beta, -alpha);
                     this.board[i] = 0;
@@ -106,6 +107,9 @@ AppService.prototype = {
                     if (alpha >= beta) {
                         return alpha;
                     }
+		    // Note both are maximizers
+		    // we are interested in getting the maximum outcome everytime
+		    // if max is greater than the min, it's a good move
                     if (max > min) {
                         min = max;
                         next = i;
@@ -113,9 +117,10 @@ AppService.prototype = {
                 }
             }
         }
-        if (depth) {
+        if (depth > 0) {
             return max || 0;
         }
+	// We are at the root
         else {
             return next;
         }
