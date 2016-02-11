@@ -11,6 +11,12 @@ use App\Url;
 
 class UrlController extends Controller {
 
+    // Shuffled letters of [0-9A-Za-z]
+    // We shuffle so that users won't know 
+    // the order of generated code
+    private $_codeset = "scOKfk6oiCux0WNqbSp7P2vgIwYRGmAXUHtJjar0Ez4MT5leFyZ9D83hBQVLd1n";
+    private $_base = 63;
+
     /**
     * Function to shorten the url given
     * return $url to '/'
@@ -18,6 +24,7 @@ class UrlController extends Controller {
     */
     public function shorten() {
         // Validate if the entered url is a valid URL
+
         $rules = array(
             'url' => 'required|url'
         );
@@ -33,21 +40,54 @@ class UrlController extends Controller {
         else {
 
             // We want to know if url exists in database
-            $url = Url::where('url', '=', Request::get('url'))->first();
+            $url = Url::where('code', '=', md5(Request::get('url')))->first();
 
             if ($url) {
-                $short_url .= $url['code'];
+                $id = $this->_getCompressedURL($url['id']);
+                $short_url .= $id;
                 return Redirect::to('/')
                 ->with('url',$short_url);
             }
             else {
-                $new_code = $this->_addUrl();
+                $id = $this->_addUrl();
+                $code = $this->_getCompressedURL($id);
 
-                $short_url .= $new_code;
+                $short_url .= $code;
                 return Redirect::to('/')
                 ->with('url',$short_url);
             }
         }
+    }
+
+    /**
+     * Gives us back the index of the 
+     * compressed URL code
+     *
+     */
+    private function _getIndex($compressed) {
+
+        $index = 0;
+        for ($i = strlen($compressed); $i; $i--) {
+            $index += strpos($this->_codeset, substr($compressed, (-1 * ( $i - strlen($compressed) )),1)) 
+                    * pow($this->_base,$i-1);
+        }
+        return $index;
+    }
+
+    /**
+     * We generate a base 64 code from the 
+     * index of the inserted record 
+     *
+     */
+    private function _getCompressedURL($index) {
+        $code = "";
+
+        while ($index > 0) {
+            $code  = substr($this->_codeset, ($index % $this->_base), 1) . $code;
+            $index = floor($index/$this->_base);
+        }
+
+        return $code;
     }
 
     /**
@@ -58,24 +98,15 @@ class UrlController extends Controller {
      */
     private function _addUrl() {
 
-        $new_code;
-        
-        // We want to make sure the generated code is unique
-        // else we will keep generating until we 
-        // produce a unique key
-        do {
-            $new_code = str_random(8);
-        } while(Url::where('code','=',$new_code)->count()>0);
-
         // Add both url and short key to the database
-        Url::create(
-          array(
-            'url' => Request::get('url'),
-            'code' => $new_code
-          )
+        $url = Url::create(
+            array(
+                'url' => Request::get('url'),
+                'code' => md5(Request::get('url'))
+            )
         );
 
-        return $new_code;
+        return $url->id;
     }
 
     /**
@@ -84,7 +115,8 @@ class UrlController extends Controller {
      * 
      */
     public function redirect($code){
-        $row = Url::where('code', '=', $code)->first();
+        $id = $this->_getIndex($code);
+        $row = Url::where('id', '=', $id)->first();
 
         if($row) {
             return Redirect::to($row->url);
